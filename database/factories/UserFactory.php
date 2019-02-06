@@ -24,16 +24,35 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+
+// generate threads for testing purposes
+$factory->define(App\Channel::class, function (Faker $faker){
+
+    $name = $faker->word;
+    return[
+        'user_id' => function() {
+            return factory('App\User')->create()->id;
+        },
+        'name' => $name,
+        'slug' => $name,
+    ];
+});
+
+
 // generate threads for testing purposes
 $factory->define(App\Thread::class, function (Faker $faker){
     return[
         'user_id' => function() {
             return factory('App\User')->create()->id;
         },
+        'channel_id' => function() {
+            return factory('App\Channel')->create()->id;
+        },
         'title' => $faker->sentence,
         'body' => $faker->paragraph,
     ];
 });
+
 
 // generate replies for testing purposes
 $factory->define(App\Reply::class, function (Faker $faker){
