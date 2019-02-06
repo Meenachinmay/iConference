@@ -4,10 +4,10 @@ This will be an little bit of advance app in laravel.
 and this will contain many features which should be there in a forum application.
 
 # TODO for this APP:
-1. User can login/Sign Up
-2. User can create an new thread
-3. A thread can have replies
-4. There will channels for threads
+1. User can login/Sign Up (DONE)
+2. User can create an new thread (DONE)
+3. A thread can have replies (DONE)
+4. There will channels for threads (DONE)
 5. Users can filter thread by channels
 6. A user can filter thread by popularity
 7. A user can favoruite replies
