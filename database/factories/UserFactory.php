@@ -23,3 +23,27 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+// generate threads for testing purposes
+$factory->define(App\Thread::class, function (Faker $faker){
+    return[
+        'user_id' => function() {
+            return factory('App\User')->create()->id;
+        },
+        'title' => $faker->sentence,
+        'body' => $faker->paragraph,
+    ];
+});
+
+// generate replies for testing purposes
+$factory->define(App\Reply::class, function (Faker $faker){
+    return[
+        'thread_id' => function() {
+            return factory('App\Thread')->create()->id;
+        },
+        'user_id' => function() {
+            return factory('App\User')->create()->id;
+        },
+        'body' => $faker->paragraph,
+    ];
+});
