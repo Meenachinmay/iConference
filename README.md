@@ -13,7 +13,7 @@ and this will contain many features which should be there in a forum application
 7. Filters on thread by username (DONE)
 8. Some meta data about threads (DONE)
 9. UI improved (DONE)
-6. A user can filter thread by popularity
+6. A user can filter thread by popularity (DONE)
 7. A user can favoruite replies
 8. User will have an profile
 9. Authorization Policies

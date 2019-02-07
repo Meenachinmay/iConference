@@ -97,6 +97,7 @@ class ThreadsController extends Controller
      */
     protected function getThreads(Channel $channel, ThreadFilters $filters)
     {
+        // getting the threads in default order
         $threads = Thread::latest()->filter($filters);
 
         if ($channel->exists) {
