@@ -28,19 +28,8 @@ class ThreadsController extends Controller
     public function index(Channel $channel, ThreadFilters $filters)
     {
 
-        if ($channel->exists) {
-
-            // if channel id exist then getting all the threads of that channel for show
-            $threads = $channel->threads()->latest();
-
-        } else {
-
-            // else getting all the threads of that channel
-            $threads = Thread::latest();
-        }
-
-        // getting the filtered results
-        $threads = $threads->filter($filters)->get();
+        // getting threads by applying filters if there is any
+        $threads = $this->getThreads($channel, $filters);
 
         return view('threads.index', compact('threads'));
     }
@@ -64,15 +53,20 @@ class ThreadsController extends Controller
             'body' => request('body')
         ]);
 
-        return redirect()->route('threadShow');
+        return redirect()->route('threadIndex');
     }
 
 
 
     public function show($channelId, Thread $thread)
     {
-        // showing a thread
-        return view ('threads.show', compact('thread'));
+        // showing a thread ( also creating a pagination for replies when they will more than 10 in count)
+        return view ('threads.show', [
+
+            'thread' => $thread,
+            'replies' => $thread->replies()->paginate(10),
+
+        ]);
     }
 
 
@@ -94,6 +88,27 @@ class ThreadsController extends Controller
     public function destroy(Thread $thread)
     {
         //
+    }
+
+    /**
+     * @param Channel $channel
+     * @param ThreadFilters $filters
+     * @return mixed
+     */
+    protected function getThreads(Channel $channel, ThreadFilters $filters)
+    {
+        $threads = Thread::latest()->filter($filters);
+
+        if ($channel->exists) {
+
+            // if channel id exist then getting all the threads of that channel for show
+            $threads->where('channel_id', $channel->id);
+
+        }
+
+        // getting the filtered results
+        $threads = $threads->get();
+        return $threads;
     }
 
 }

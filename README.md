@@ -1,5 +1,5 @@
-# iConference
-My Third laravel project. This is advance forum application.
+# iConference (User Forum Application)
+My Third laravel project.
 This will be an little bit of advance app in laravel.
 and this will contain many features which should be there in a forum application.
 
@@ -8,7 +8,11 @@ and this will contain many features which should be there in a forum application
 2. User can create an new thread (DONE)
 3. A thread can have replies (DONE)
 4. There will channels for threads (DONE)
-5. Users can filter thread by channels
+5. Users can filter thread by channels (DONE)
+6.  Pagination (DONE)
+7. Filters on thread by username (DONE)
+8. Some meta data about threads (DONE)
+9. UI improved (DONE)
 6. A user can filter thread by popularity
 7. A user can favoruite replies
 8. User will have an profile

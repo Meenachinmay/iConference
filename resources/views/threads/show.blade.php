@@ -4,10 +4,11 @@
     <div class="container mt-5">
 
         <!-- show a single thread-->
-        <div class="row justify-content-center">
+        <div class="row">
 
             <div class="col-md-8">
 
+                <!-- thread body and title -->
                 <div class="card">
 
                     <div class="card-header">
@@ -24,59 +25,52 @@
                     </div>
 
                 </div>
+                <!-- thread body and title -->
 
-            </div>
-        </div>
+                <!-- thread replies -->
+                @if($replies->count() > 0)
+                    <!-- thread replies -->
+                    <div class="card mt-4">
 
-        <!-- replies showing section starts from here -->
-        @if($thread->replies()->count() > 0)
-            <!-- Threads reaplies showing section -->
-            <div class="row justify-content-center mt-3">
+                        <!-- replies card header -->
+                        <div class="card-header"><h5 class="font-weight-light">Replies</h5></div>
 
-                <div class="col-md-8">
+                        <div class="card-body">
 
-                   <div class="card">
+                        @foreach($replies as $reply)
 
-                       <!-- replies card header -->
-                       <div class="card-header">Replies</div>
+                            <!-- including the reply section -->
+                                @include('threads.reply')
 
-                       <div class="card-body">
+                        @endforeach
 
-                           @foreach($thread->replies as $reply)
+                        <!-- creating pagination links here -->
+                        {{ $replies->links() }}
 
-                               <!-- including the reply section -->
-                               @include('threads.reply')
+                        </div>
 
-                           @endforeach
+                    </div>
 
-                       </div>
+                @endif
+                <!-- thread replies -->
 
-                   </div>
+                @if(Auth::check())
 
-                </div>
-            </div>
-        @endif
-
-        <!-- thread reply section starts from here -->
-        @if(Auth::check())
-
-            <!-- Threads reaplies creaitng section -->
-            <div class="row justify-content-center mt-5">
-
-                <div class="col-md-8">
-
-                    <div class="card">
+                    <!-- reply box -->
+                    <div class="card mt-4">
 
                         <!-- replies card header -->
                         <div class="card-header">Make a reply</div>
+
                         @include('includes.errors')
+
                         <div class="card-body">
 
                             <form method="POST" action="{{ route('addNewReply', $thread->id) }}">@csrf
 
                                 <div class="form-group">
-                                    <textarea name="body" id="body" cols="6" rows="3"
-                                              class="form-control" placeholder="Have something to say..."></textarea>
+                                        <textarea name="body" id="body" cols="6" rows="3"
+                                                  class="form-control" placeholder="Have something to say..."></textarea>
                                 </div>
 
                                 <div class="form-group">
@@ -89,16 +83,49 @@
 
                     </div>
 
-                </div>
-            </div>
-        @else
-            <div class="row justify-content-center mt-5">
+                @else
 
-                <div class="col-md-8">
-                    <p>Please <a href="{{ route('login') }}">sign in</a> to participate in this discussion</p>
+                    <div class="row justify-content-center mt-5">
+
+                        <div class="col-md-8">
+                            <p>Please <a href="{{ route('login') }}">sign in</a> to participate in this discussion</p>
+                        </div>
+
+                    </div>
+
+                @endif
+                <!-- reply box -->
+
+            </div>
+
+            <div class="col-md-4">
+
+                <!-- thread body and title -->
+                <div class="card">
+
+                    {{--<div class="card-header">--}}
+
+                        {{--<a href="#">&nbsp;{{ $thread->creater->name }}</a> &nbsp;posted this--}}
+                        {{--{{ $thread->created_at->diffForHumans() }} and currently have--}}
+                        {{--{{ $thread->replies()->count() }} replies on it.--}}
+
+                    {{--</div>--}}
+
+                    <!-- card for each thread -->
+                    <div class="card-body">
+
+                        This thread was published {{ $thread->created_at->diffForHumans() }}
+                        by <a href="#">{{ $thread->creater->name }}</a>.
+                        and currently has {{ $thread->replies_count }} {{ str_plural('reply', $thread->replies_count) }} on it.
+
+                    </div>
+
                 </div>
 
             </div>
-        @endif
-    </div>
+            <!-- thread body and title -->
+
+        </div> <!-- row ends here -->
+
+    </div> <!-- container ends here -->
 @endsection
