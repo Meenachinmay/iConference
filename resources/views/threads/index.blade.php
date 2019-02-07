@@ -19,7 +19,7 @@
 
                                     <articel>
                                         <a href="{{ route( 'threadShow',
-                                        ['channel' => $thread->channel->slug, 'thread' => $thread->id] ) }}">
+                                        ['channel' => $thread->channel->slug, 'thread_id' => $thread->id] ) }}">
                                             <h4>{{ $thread->title }}</h4>
                                         </a>
                                         <div class="body">{{ $thread->body }}}</div>

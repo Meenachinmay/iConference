@@ -69,7 +69,7 @@
 
                         <!-- replies card header -->
                         <div class="card-header">Make a reply</div>
-
+                        @include('includes.errors')
                         <div class="card-body">
 
                             <form method="POST" action="{{ route('addNewReply', $thread->id) }}">@csrf

@@ -13,22 +13,47 @@
                     <!-- card for each thread -->
                     <div class="card-body">
 
-                        <form method="POST" action="/threads">@csrf
+                        @include('includes.errors')
+                        <form method="POST" action="{{ route('threadCreatePost') }}">@csrf
 
+                            <!-- Choose a channel -->
+                            <div class="form-group">
+
+                                <label> Choose a channel </label>
+
+                                <select class="form-control" name="channel_id" id="channel_id" required>
+                                    <option value="">Choose One...</option>
+                                    @foreach($channels as $channel)
+
+                                        <option value="{{ $channel->id }}"
+                                                {{ old('channel_id' == $channel->id ? 'selected' : '') }}>
+                                            {{ $channel->name }}</option>
+
+                                    @endforeach
+
+
+                                </select>
+
+                            </div>
+
+                            <!-- Create a title field -->
                             <div class="form-group">
 
                                 <label> Title </label>
 
-                                <input class="form-control" type="text" name="title" placeholder="Add your title here">
+                                <input class="form-control" type="text" name="title"
+                                       placeholder="Add your title here" value="{{ old('title') }}" required>
 
                             </div>
 
+                            <!-- Create a content field -->
                             <div class="form-group">
 
                                 <label> Thread content </label>
 
                                 <textarea class="form-control" type="text"
-                                          name="body" rows="10" cols="15" placeholder="Place your content here..."></textarea>
+                                          name="body" rows="10" cols="15"
+                                          placeholder="Place your content here..." required>{{ old('body') }}</textarea>
 
                             </div>
 

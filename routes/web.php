@@ -37,3 +37,6 @@ Route::get('threads/{channel}/{thread}', 'ThreadsController@show')->name('thread
 Route::post('threads/{thread}/replies', 'RepliesController@store')->name('addNewReply');
 
 
+// viewing all threads of a channel
+Route::get('threads/{channel}', 'ThreadsController@index')->name('allThreads_of_a_channel');
+

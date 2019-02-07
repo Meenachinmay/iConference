@@ -21,7 +21,7 @@
 </head>
 <body style="padding-bottom: 100px">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel ">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'iConference') }}
@@ -31,9 +31,56 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <a class="nav-link" href="/threads">All Threads</a>
+
+                        <!-- Drop down on navbar for showing threads filters-->
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Browse
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                <!-- all threads -->
+                                <a class="nav-link" href="{{ route('threadIndex') }}">All Threads</a>
+
+                                @if(auth()->check())
+
+                                <!-- authenticated user's threads -->
+                                <a class="nav-link" href="/threads?by={{ auth()->user()->name }}">My Threads</a>
+
+                                @endif
+
+                            </div>
+                        </li>
+
+
+                        <a class="nav-link" href="{{ route('threadCreate') }}">New Thread</a>
+
+                        <!-- Drop down on navbar for showing all the channels-->
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Channels
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                @foreach($channels as $channel)
+
+                                    <a class="dropdown-item"
+                                       href="{{ route('allThreads_of_a_channel', $channel->slug) }}">{{ $channel->name }}</a>
+                                    <div class="dropdown-divider"></div>
+
+                                @endforeach
+
+                            </div>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,5 +123,10 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        $(".alert").delay(2000).slideUp(200, function() {
+            $(this).alert('close');
+        });
+    </script>
 </body>
 </html>

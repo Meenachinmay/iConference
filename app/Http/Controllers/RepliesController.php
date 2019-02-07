@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReplyRequest;
 use Illuminate\Http\Request;
 use App\Thread;
 use App\Reply;
@@ -22,7 +23,7 @@ class RepliesController extends Controller
     }
 
     // store a reply to a thread
-    public function store(Thread $thread, Request $request)
+    public function store(Thread $thread, ReplyRequest $request)
     {
 //        $thread->addReply([
 //
