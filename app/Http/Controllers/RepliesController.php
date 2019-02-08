@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ReplyRequest;
 use Illuminate\Http\Request;
 use App\Thread;
+use App\Channel;
 use App\Reply;
 use Auth;
 
@@ -25,12 +26,6 @@ class RepliesController extends Controller
     // store a reply to a thread
     public function store(Thread $thread, ReplyRequest $request)
     {
-//        $thread->addReply([
-//
-//            'body' => request(['body']),
-//
-//            'user_id' => Auth::id(),
-//        ]);
 
         Reply::create([
             'user_id' => Auth::id(),

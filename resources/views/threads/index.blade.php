@@ -19,16 +19,16 @@
                                 <div class="card-header">
 
                                     <!-- replies count with thread path link -->
-                                    <a href="{{ route( 'threadShow',
-                                        ['channel' => $thread->channel->slug, 'thread_id' => $thread->id] ) }}">
+                                    <a href="{{ $thread->path() }}">
                                         <strong><p class="float-right"> {{ $thread->replies_count }}
                                             {{ str_plural('reply', $thread->replies_count) }}</p></strong></a>
 
                                     <!-- Thread title -->
-                                    <a href="{{ route( 'threadShow',
-                                        ['channel' => $thread->channel->slug, 'thread_id' => $thread->id] ) }}">
-                                        <h4>{{ $thread->title }}</h4>
+                                    <a href="{{ $thread->path() }}">
+                                        <h3>{{ $thread->title }}</h3>
                                     </a>
+
+                                    <small style="font-size: 13px;">Posted by - {{ $thread->creater->name}} </small>
 
                                 </div>
 
@@ -39,7 +39,6 @@
                                         <div class="body">{{ $thread->body }}}</div>
 
                                     </articel>
-                                    <hr>
 
                                 </div>
                             </div>

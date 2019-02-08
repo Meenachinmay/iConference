@@ -18,11 +18,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// orginal home route
-//Route::get('home', 'HomeController@index')->name('home');
+// user dashboard route
+Route::get('home', 'HomeController@index')->name('home');
 
 // modified home route for temperary uses
-Route::get('home', 'ThreadsController@index')->name('home');
+//Route::get('home', 'ThreadsController@index')->name('home');
 
 // thread index
 Route::get('threads', 'ThreadsController@index')->name('threadIndex');
@@ -31,7 +31,7 @@ Route::get('threads', 'ThreadsController@index')->name('threadIndex');
 Route::get('threads/create', 'ThreadsController@create')->name('threadCreate');
 
 // thread createPost
-Route::post('threads/createPost', 'ThreadsController@store')->name('threadCreatePost');
+Route::post('threads/creatThread', 'ThreadsController@store')->name('threadCreateThread');
 
 // thread show
 Route::get('threads/{channel}/{thread}', 'ThreadsController@show')->name('threadShow');
@@ -43,3 +43,6 @@ Route::post('threads/{thread}/replies', 'RepliesController@store')->name('addNew
 // viewing all threads of a channel
 Route::get('threads/{channel}', 'ThreadsController@index')->name('allThreads_of_a_channel');
 
+
+// favorites reply route
+Route::post('replies/{reply}/favorites', 'FavoritesController@store')->name('addFavoriteReply');

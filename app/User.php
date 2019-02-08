@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Illuminate\Filesystem\Cache;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades;
+use Illuminate\Support\Facades\Cache;
+
 
 class User extends Authenticatable
 {
