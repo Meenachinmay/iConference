@@ -137,12 +137,14 @@
 
         </main>
     </div>
+
+    {{--<script>--}}
+        {{--$(".alert").delay(2500).slideUp(200, function() {--}}
+            {{--$(this).alert('close');--}}
+        {{--});--}}
+    {{--</script>--}}
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        $(".alert").delay(2500).slideUp(200, function() {
-            $(this).alert('close');
-        });
-    </script>
 </body>
 </html>

@@ -1,49 +1,67 @@
-<div class="card mb-4">
+<reply inline-template>
 
-    <div class="card-header">
+    <div class="card mb-4">
 
-        @can('update', $reply)
-            <!-- mark as a favorite thread -->
-            <form method="POST" action="{{ route('addFavoriteReply', $reply->id) }}">@csrf
+        <div class="card-header">
 
-                <button class="btn btn-success btn-sm float-right" type="submit" {{ $reply->isFavorited() ? 'disabled' : '' }}>
-                    <strong>
-                        @if($reply->favorites_count == 0)
-                            <strong>Star</strong>
-                        @else
-                           {{ $reply->favorites_count }} {{str_plural('Star', $reply->favorites_count)}}
-                        @endif
-                    </strong>
-                </button>
+            @can('update', $reply)
+                <!-- mark as a favorite thread -->
+                <form method="POST" action="{{ route('addFavoriteReply', $reply->id) }}">@csrf
 
-            </form>
+                    <button class="btn btn-success btn-sm float-right" type="submit" {{ $reply->isFavorited() ? 'disabled' : '' }}>
+                        <strong>
+                            @if($reply->favorites_count == 0)
+                                <strong>Star</strong>
+                            @else
+                               {{ $reply->favorites_count }} {{str_plural('Star', $reply->favorites_count)}}
+                            @endif
+                        </strong>
+                    </button>
 
-        @endcan
+                </form>
 
-        <a href="{{ $reply->owner->path() }}">
-        &nbsp; <strong>{{ $reply->owner->name }}</strong></a> said {{ $reply->created_at->diffForHumans() }}...
-    </div>
+            @endcan
 
-    <!-- card for each thread -->
-    <div class="card-body">
+            <a href="{{ $reply->owner->path() }}">
+            &nbsp; <strong>{{ $reply->owner->name }}</strong></a> said {{ $reply->created_at->diffForHumans() }}...
+        </div>
 
-        {{ $reply->body }}
+        <!-- card for each thread -->
+        <div class="card-body">
 
-    </div>
+            <div v-if="editing">
+                <textarea></textarea>
+            </div>
 
-    <!-- card footer -->
-    @can('update', $reply)
+            <div v-else>
 
-        <div class="card-footer">
+                {{ $reply->body }}
 
-            <form method="POST" action="{{ $reply->path() }}">@csrf
-                {{ method_field('DELETE') }}
-                <button class="btn btn-sm btn-danger float-md-left" type="submit"><strong>Delete</strong></button>
-            </form>
+            </div>
 
         </div>
 
-    @endcan
+        <!-- card footer -->
+        @can('update', $reply)
+
+            <div class="card-footer">
+
+                <div class="row">
+
+                    <button class="btn btn-sm btn-light" @click="editing = true">Edit</button>
+
+                    <form method="POST" action="{{ $reply->path() }}">@csrf
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-sm btn-danger ml-2" type="submit"><strong>Delete</strong></button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        @endcan
 
 
-</div>
+    </div>
+
+</reply>
