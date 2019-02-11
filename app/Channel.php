@@ -11,10 +11,10 @@ class Channel extends Model
         return $this->hasMany(Thread::class);
     }
 
+    // changing default route key name
     public function getRouteKeyName()
     {
         return 'slug';
     }
-
 
 }

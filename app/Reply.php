@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+
+    use Favorites_info, RecordsActivity;
+
     protected $fillable = ['user_id', 'thread_id', 'body'];
+
+    // with every single reply always load 'owner' and 'favorites table information'
+    protected $with = ['owner', 'favorites'];
 
     // replies belongs to owner (owner means the creater of the threads)
     public function owner()
@@ -14,26 +20,10 @@ class Reply extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-
-    public function favorites()
+    //
+    public function thread()
     {
-        // we will back on this later (morph many relatioship)
-        return $this->morphMany(Favorite::class, 'favorited');
+        return $this->belongsTo(Thread::class);
     }
 
-    // mark a reply as favorite
-    public function favorite()
-    {
-        if(!$this->favorites()->where(['user_id' => auth()->id()])->exists()){
-            $this->favorites()->create(['user_id' => auth()->id()]);
-        }
-
-    }
-
-    // checking that if a current user already marked this reply as favotite
-    public function isFavorited()
-    {
-        // make a look into favorite table that authenticated user liked it before or not
-        return $this->favorites()->where('user_id', auth()->id())->exists();
-    }
 }

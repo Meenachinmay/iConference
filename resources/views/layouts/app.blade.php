@@ -7,10 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <title>{{ config('app.name', 'iConference') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,7 +16,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="padding-bottom: 100px">
+<body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel ">
             <div class="container">
@@ -108,13 +105,16 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <strong>{{ __('Logout') }}</strong>
                                     </a>
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
                                 </div>
+
                             </li>
                         @endguest
                     </ul>
@@ -123,13 +123,16 @@
         </nav>
 
         <main class="py-4">
+
+            <div id="vueapp">
+                <flash message="success"></flash>
+            </div>
+
             @yield('content')
+
         </main>
     </div>
-    <script>
-        $(".alert").delay(2000).slideUp(200, function() {
-            $(this).alert('close');
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

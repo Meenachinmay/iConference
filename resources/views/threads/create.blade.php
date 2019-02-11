@@ -14,7 +14,7 @@
                     <div class="card-body">
 
                         @include('includes.errors')
-                        <form method="POST" action="{{ route('thereadCreateThread') }}">@csrf
+                        <form method="POST" action="{{ route('threadCreateThread') }}">@csrf
 
                             <!-- Choose a channel -->
                             <div class="form-group">

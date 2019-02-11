@@ -73,7 +73,7 @@ class ThreadsController extends Controller
 
     public function edit(Thread $thread)
     {
-        //
+
     }
 
 
@@ -84,10 +84,16 @@ class ThreadsController extends Controller
     }
 
 
-
-    public function destroy(Thread $thread)
+    // to delete a particular thread
+    public function destroy($channel, Thread $thread)
     {
-        //
+
+        $this->authorize('update', $thread);
+
+        $thread->delete();
+
+        return redirect()->route('threadIndex');
+
     }
 
     /**
@@ -98,7 +104,7 @@ class ThreadsController extends Controller
     protected function getThreads(Channel $channel, ThreadFilters $filters)
     {
         // getting the threads in default order
-        $threads = Thread::with(['channel', 'creater'])->latest()->filter($filters);
+        $threads = Thread::latest()->filter($filters);
 
         if ($channel->exists) {
 

@@ -66,3 +66,19 @@ $factory->define(App\Reply::class, function (Faker $faker){
         'body' => $faker->paragraph,
     ];
 });
+
+
+// generate replies for testing purposes
+$factory->define(App\Message::class, function (Faker $faker){
+
+    do {
+        $user_id_from = rand(1,20);
+        $user_id_to = rand(1,20);
+    }while($user_id_from === $user_id_to);
+
+    return [
+        'user_id_from' => $user_id_from,
+        'user_id_to' => $user_id_to,
+        'message' => $faker->sentence,
+    ];
+});

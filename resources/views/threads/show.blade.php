@@ -13,7 +13,16 @@
 
                     <div class="card-header">
 
-                        <a href="#">&nbsp;{{ $thread->creater->name }}</a> &nbsp;posted &nbsp;{{ $thread->title }}
+                        @can('update', $thread)
+
+                            <form method="POST" action="{{ $thread->path() }}">@csrf
+                                {{ method_field('DELETE') }}
+                                <button class="btn btn-link float-right" type="submit"><strong>Delete Thread</strong></button>
+                            </form>
+
+                        @endcan
+
+                        <a href="{{ $thread->creater->path() }}">&nbsp;<strong>{{ $thread->creater->name }}</strong></a> &nbsp;posted &nbsp;{{ $thread->title }}
 
                     </div>
 
@@ -25,10 +34,10 @@
                     </div>
 
                 </div>
-                <!-- thread body and title -->
+                <!-- thread body and title section ends here -->
 
                 <!-- thread replies -->
-                @if($replies->count() > 0)
+                @if($thread->replies_count > 0)
                     <!-- thread replies -->
                     <div class="card mt-4">
 
@@ -54,7 +63,7 @@
                 @endif
                 <!-- thread replies -->
 
-                @if(Auth::check())
+                @if(auth()->id())
 
                     <!-- reply box -->
                     <div class="card mt-4">

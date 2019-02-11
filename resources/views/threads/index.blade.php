@@ -5,8 +5,7 @@
 
         <div class="row justify-content-center">
 
-            <div class="col-md-8">
-
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">Forum Threads</div>
 
@@ -28,7 +27,7 @@
                                         <h3>{{ $thread->title }}</h3>
                                     </a>
 
-                                    <small style="font-size: 13px;">Posted by - {{ $thread->creater->name}} </small>
+                                    <small style="font-size: 13px;">Posted by - <a href="{{ $thread->creater->path() }}">{{ $thread->creater->name}}</a> </small>
 
                                 </div>
 

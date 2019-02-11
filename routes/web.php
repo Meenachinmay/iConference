@@ -36,13 +36,19 @@ Route::post('threads/creatThread', 'ThreadsController@store')->name('threadCreat
 // thread show
 Route::get('threads/{channel}/{thread}', 'ThreadsController@show')->name('threadShow');
 
+// thread show
+Route::delete('threads/{channel}/{thread}', 'ThreadsController@destroy')->name('deleteThisThread');
+
+
 // adding reply to a thread route
 Route::post('threads/{thread}/replies', 'RepliesController@store')->name('addNewReply');
-
 
 // viewing all threads of a channel
 Route::get('threads/{channel}', 'ThreadsController@index')->name('allThreads_of_a_channel');
 
-
 // favorites reply route
 Route::post('replies/{reply}/favorites', 'FavoritesController@store')->name('addFavoriteReply');
+
+// User Profile routes
+Route::get('/profile/{user}', 'ProfilesController@show')->name('userProfile');
+

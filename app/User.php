@@ -39,8 +39,38 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // User profile path
+    public function path(){
+        return "/profile/{$this->name}";
+    }
 
+    // Check user's online status
     public function isOnline(){
         return Cache::has('user-is-online-' . $this->id);
+    }
+
+    // user and threads relationship
+    public function threads()
+    {
+        return $this->hasMany(Thread::class);
+    }
+
+    //
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
+    //
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+
+    //
+    public function activity()
+    {
+        return $this->hasMany(Activity::class);
     }
 }
