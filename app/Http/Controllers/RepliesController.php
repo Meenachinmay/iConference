@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Favorite;
 use App\Http\Requests\ReplyRequest;
 use Illuminate\Http\Request;
 use App\Thread;
@@ -33,7 +34,22 @@ class RepliesController extends Controller
             'body' => $request->body
         ]);
 
-        return back();
+        return back()->with('flash', "New reply added.");
 
+    }
+
+
+    // method to delete a reply only by authenticated user
+    public function destroy(Reply $reply)
+    {
+        // if user is authorized then he can delete the reply ( Authorization using policy)
+        $this->authorize('update', $reply);
+
+//        $favorites = Favorite::where('favorited_id', $reply->id)->get();
+
+        // delete it and back
+        $reply->delete();
+
+        return back()->with('flash', 'Reply deleted successfully');
     }
 }

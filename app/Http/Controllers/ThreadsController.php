@@ -53,7 +53,7 @@ class ThreadsController extends Controller
             'body' => request('body')
         ]);
 
-        return redirect()->route('threadIndex');
+        return redirect($thread->path())->with('flash', "A thread has beed published.");
     }
 
 
@@ -92,7 +92,7 @@ class ThreadsController extends Controller
 
         $thread->delete();
 
-        return redirect()->route('threadIndex');
+        return redirect()->route('threadIndex')->with('flash', "A thread has beed deleted.");
 
     }
 

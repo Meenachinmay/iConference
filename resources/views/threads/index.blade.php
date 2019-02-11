@@ -35,7 +35,7 @@
 
                                     <articel>
 
-                                        <div class="body">{{ $thread->body }}}</div>
+                                        <div class="body">{{ $thread->body }}</div>
 
                                     </articel>
 

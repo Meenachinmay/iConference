@@ -13,6 +13,7 @@
                     <div class="card-body">
 
                         <h1> {{ $profileUser->name }} </h1>
+
                         <h6> <strong>Member Since {{ $profileUser->created_at->diffForHumans() }}</strong></h6>
 
                     </div>
@@ -38,6 +39,7 @@
                         @if($activity->type == "created_reply")
                             @include('profiles.activities.created_reply')
                         @endif
+
 
                     @endforeach
                     <hr>

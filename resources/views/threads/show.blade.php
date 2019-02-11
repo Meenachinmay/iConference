@@ -35,7 +35,6 @@
 
                 </div>
                 <!-- thread body and title section ends here -->
-
                 <!-- thread replies -->
                 @if($thread->replies_count > 0)
                     <!-- thread replies -->

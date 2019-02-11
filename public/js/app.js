@@ -1782,8 +1782,29 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    var _this = this;
+
     if (this.message) {
-      this.body = this.message, this.show = true;
+      this.flash(message);
+    } // listening for the event
+
+
+    window.events.$on('flash', function (message) {
+      _this.flash(message);
+    });
+  },
+  methods: {
+    flash: function flash(message) {
+      this.body = message;
+      this.show = true;
+      this.hide();
+    },
+    hide: function hide() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.show = false;
+      }, 3000);
     }
   }
 });
@@ -6061,7 +6082,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.alert-flash{\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n}\n\n", ""]);
+exports.push([module.i, "\n.alert-flash{\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n    z-index: 1;\n}\n\n", ""]);
 
 // exports
 
@@ -48508,19 +48529,12 @@ if (token) {
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-// import Echo from 'laravel-echo'
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
+
+window.events = new Vue(); // emitting the flash event
+
+window.flash = function (message) {
+  window.events.$emit('flash', message);
+};
 
 /***/ }),
 

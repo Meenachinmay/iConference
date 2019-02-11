@@ -102,6 +102,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('userProfile', Auth::user()) }}"><strong>My Profile</strong></a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -125,7 +128,9 @@
         <main class="py-4">
 
             <div id="vueapp">
-                <flash message="success"></flash>
+
+                <flash message="{{ session('flash') }}"></flash>
+
             </div>
 
             @yield('content')
@@ -134,5 +139,10 @@
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $(".alert").delay(2500).slideUp(200, function() {
+            $(this).alert('close');
+        });
+    </script>
 </body>
 </html>

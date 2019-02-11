@@ -22,11 +22,34 @@
 
         created() {
             if (this.message) {
-                this.body = this.message,
+                this.flash(message);
+            }
+
+            // listening for the event
+            window.events.$on('flash', message => {
+                this.flash(message);
+            });
+        },
+
+        methods: {
+
+            flash(message){
+
+                this.body = message;
+
                 this.show = true;
+
+                this.hide();
+            },
+
+
+            hide() {
+                setTimeout(() => {
+                    this.show = false;
+                }, 3000);
             }
         }
-    }
+    };
 </script>
 
 <style>
@@ -35,6 +58,7 @@
         position: fixed;
         right: 25px;
         bottom: 25px;
+        z-index: 1;
     }
 
 </style>
