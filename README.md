@@ -17,10 +17,10 @@ and this will contain many features which should be there in a forum application
 7. A user can favoruite replies (DONE)
 8. Query Optimizations (DONE)
 9. Laravel bug bar added for better optimizations(DONE)
-8. User will have an profile
-9. Authorization Policies
-10. Activity feed with TDD
-11. Flash messages with VUEjs
+8. User will have an profile (DONE)
+9. Authorization Policies (DONE)
+10. Activity feed (DONE)
+11. Flash messages with VUEjs (DONE)
 12. Laravel and VueJS pagination
 13. A user can filter unanswerd thread
 14. Thread will have subscription
