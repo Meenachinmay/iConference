@@ -47,10 +47,12 @@ Route::post('threads/{thread}/replies', 'RepliesController@store')->name('addNew
 // route to delete a reply
 Route::delete('/replies/{reply}', 'RepliesController@destroy')->name('deleteReply');
 
+// route to update a reply
+Route::patch('/replies/{reply}', 'RepliesController@update')->name('updateReply');
+
 
 // viewing all threads of a channel
 Route::get('threads/{channel}', 'ThreadsController@index')->name('allThreads_of_a_channel');
-
 
 
 // favorites reply route

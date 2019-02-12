@@ -6,7 +6,7 @@
 
         <div class="row justify-content-center">
 
-            <div class="col-md-10 mb-3">
+            <div class="col-md-10 mb-3 mt-1">
 
                 <div class="card" style="font-family: 'Century Gothic'; color:#5a6268;">
 

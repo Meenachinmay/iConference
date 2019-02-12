@@ -24,6 +24,8 @@ class RepliesController extends Controller
         $this->middleware('auth');
     }
 
+
+
     // store a reply to a thread
     public function store(Thread $thread, ReplyRequest $request)
     {
@@ -39,17 +41,34 @@ class RepliesController extends Controller
     }
 
 
+
+    // update a reply here (with vuejs)
+    public function update(Reply $reply)
+    {
+        $this->authorize('update', $reply);
+
+        $reply->update(\request(['body']));
+
+        return back()->with('flash', 'Reply has been updated.');
+    }
+
+
+
     // method to delete a reply only by authenticated user
     public function destroy(Reply $reply)
     {
         // if user is authorized then he can delete the reply ( Authorization using policy)
         $this->authorize('update', $reply);
 
-//        $favorites = Favorite::where('favorited_id', $reply->id)->get();
-
         // delete it and back
         $reply->delete();
 
+        // if a ajax request has been placed
+        if(request()->expectsJson()){
+           return response(['status' => 'Reply deleted']);
+        }
+
         return back()->with('flash', 'Reply deleted successfully');
     }
+
 }

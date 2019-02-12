@@ -125,24 +125,22 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <!-- flash component place here -->
+        <div class="container">
 
-            <div id="vueapp">
+            {{--<flash-component></flash-component>--}}
 
-                <flash message="{{ session('flash') }}"></flash>
+        </div>
 
-            </div>
 
-            @yield('content')
-
-        </main>
+        @yield('content')
     </div>
 
-    {{--<script>--}}
-        {{--$(".alert").delay(2500).slideUp(200, function() {--}}
-            {{--$(this).alert('close');--}}
-        {{--});--}}
-    {{--</script>--}}
+    <script>
+        $(".alert").delay(2500).slideUp(200, function() {
+            $(this).alert('close');
+        });
+    </script>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
