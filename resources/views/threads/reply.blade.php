@@ -5,24 +5,9 @@
     <div class="card-header">
 
         @can('update', $reply)
-            <!-- mark as a favorite thread -->
-            <form method="POST" action="{{ route('addFavoriteReply', $reply->id) }}">@csrf
 
-                <button class="btn btn-success btn-sm float-right" type="submit" {{ $reply->isFavorited() ? 'disabled' : '' }}>
-
-                    <strong>
-
-                        @if($reply->favorites_count == 0)
-                            <strong>Star</strong>
-                        @else
-                           {{ $reply->favorites_count }} {{str_plural('Star', $reply->favorites_count)}}
-                        @endif
-
-                    </strong>
-
-                </button>
-
-            </form>
+            <!-- liking and disliking functionality coming from vue js end.  -->
+            <favorite-component :reply="{{ $reply }}"></favorite-component>
 
         @endcan
 

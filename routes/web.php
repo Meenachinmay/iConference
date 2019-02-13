@@ -58,6 +58,9 @@ Route::get('threads/{channel}', 'ThreadsController@index')->name('allThreads_of_
 // favorites reply route
 Route::post('replies/{reply}/favorites', 'FavoritesController@store')->name('addFavoriteReply');
 
+// delete a like from favorites table
+Route::delete('replies/{reply}/favorites', 'FavoritesController@destroy')->name('addFavoriteReply');
+
 // User Profile routes
 Route::get('profile/{user}', 'ProfilesController@show')->name('userProfile');
 

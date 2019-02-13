@@ -15,6 +15,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Font Awesome css -->
+    <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet" type="text/css">
+
 </head>
 <body>
     <div id="app">
@@ -135,12 +139,6 @@
 
         @yield('content')
     </div>
-
-    <script>
-        $(".alert").delay(2500).slideUp(200, function() {
-            $(this).alert('close');
-        });
-    </script>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

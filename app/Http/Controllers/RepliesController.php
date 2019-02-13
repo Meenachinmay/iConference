@@ -36,7 +36,7 @@ class RepliesController extends Controller
             'body' => $request->body
         ]);
 
-        return back()->with('flash', "New reply added.");
+        return back()->with('flash', 'New reply added.');
 
     }
 

@@ -11,8 +11,13 @@ class Reply extends Model
 
     protected $fillable = ['user_id', 'thread_id', 'body'];
 
+
     // with every single reply always load 'owner' and 'favorites table information'
     protected $with = ['owner', 'favorites'];
+
+
+    // appending the favorites count with every reply
+    protected $appends = ['favoritesCount', 'isFavorited'];
 
 
     protected static function boot()
