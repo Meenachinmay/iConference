@@ -35,7 +35,7 @@ trait Favorites_info
     }
 
 
-    //
+    // relation with Favorite model
     public function favorites()
     {
         // we will back on this later (morph many relatioship)
@@ -52,6 +52,7 @@ trait Favorites_info
             $this->favorites()->create($arguments);
         }
 
+
     }
 
 
@@ -61,6 +62,10 @@ trait Favorites_info
         $arguments = ['user_id' => auth()->id()];
 
         // fetching and deleting a like
-        $this->favorites()->where($arguments)->delete();
+        $this->favorites()->where($arguments)->delete()->get()->each(function ($favorite){
+
+            $favorite->delete();
+
+        });
     }
 }

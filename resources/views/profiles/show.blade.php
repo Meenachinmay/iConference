@@ -25,7 +25,7 @@
 
             <!-- thread body and title -->
             <div class="col-md-8">
-                @foreach($activities as $date => $record)
+                @forelse($activities as $date => $record)
 
                     <h4>{{ $date }}</h4>
                     <hr>
@@ -36,14 +36,20 @@
                             @include('profiles.activities.created_thread')
                         @endif
 
+                        {{--@if($activity->type == "created_favorite")--}}
+                            {{--@include('profiles.activities.created_favorited')--}}
+                        {{--@endif--}}
+
                         @if($activity->type == "created_reply")
                             @include('profiles.activities.created_reply')
                         @endif
 
-
                     @endforeach
+
+                @empty
+                    <h5>There is no activities, till so far.</h5>
                     <hr>
-                @endforeach
+                @endforelse
 
             </div>
             <!-- thread body and title -->

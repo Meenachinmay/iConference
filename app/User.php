@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -44,10 +45,12 @@ class User extends Authenticatable
         return "/profile/{$this->name}";
     }
 
+
     // Check user's online status
     public function isOnline(){
         return Cache::has('user-is-online-' . $this->id);
     }
+
 
     // user and threads relationship
     public function threads()
@@ -55,22 +58,24 @@ class User extends Authenticatable
         return $this->hasMany(Thread::class);
     }
 
-    //
+
+    // changing the default getRouteGetKeyName method
     public function getRouteKeyName()
     {
         return 'name';
     }
 
-    //
-    public function messages()
-    {
-        return $this->hasMany(Message::class);
-    }
 
-
-    //
+    // all the activities of this user
     public function activities()
     {
         return $this->hasMany(Activity::class);
+    }
+
+
+    // all the replies of this user
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 }

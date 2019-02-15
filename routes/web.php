@@ -62,5 +62,5 @@ Route::post('replies/{reply}/favorites', 'FavoritesController@store')->name('add
 Route::delete('replies/{reply}/favorites', 'FavoritesController@destroy')->name('addFavoriteReply');
 
 // User Profile routes
-Route::get('profile/{user}', 'ProfilesController@show')->name('userProfile');
+Route::get('/profile/{user}', 'ProfilesController@show')->name('userProfile');
 

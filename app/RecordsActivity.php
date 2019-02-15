@@ -29,9 +29,9 @@ trait RecordsActivity
         }
 
         // deleteing all the activities and replies when deleting an activity
-        static::deleting(function ($thread){
+        static::deleting(function ($model){
 
-            $thread->activity()->delete();
+            $model->activity()->delete();
 
         });
 

@@ -22,7 +22,8 @@ window.Vue = require('vue');
 
 Vue.component('flash-component', require('./components/FlashCheck.vue').default);
 
-Vue.component('reply-component', require('./components/Reply.vue').default);
+// pages section
+Vue.component('thread-component', require('./components/Thread.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
