@@ -2,7 +2,7 @@
 
     <div class="card mb-4">
 
-        <div class="card-header">
+        <div class="card-header" style="background-color: #ffffff;">
 
             <div v-if="signedIn">
 
@@ -12,7 +12,7 @@
             </div>
 
             <a :href="'/profiles/' + data.owner.name" v-text="data.owner.name">
-                &nbsp; <strong></strong></a> said {{ data.created_at }}...
+                    </a> commented on this <span v-text="ago"></span>
 
         </div>
 
@@ -39,7 +39,7 @@
 
         <!-- card footer -->
         <!--@can('update', $reply)-->
-        <div class="card-footer" v-if="canUpdate">
+        <div class="card-footer " v-if="canUpdate" style="background-color: #ffffff">
 
             <div class="row">
 
@@ -67,6 +67,9 @@
     // import here the other components
     import FavoriteComponent from './FavoriteComponent.vue'
 
+    // import moment js
+    import moment from 'moment'
+
     export default {
         props: ['data', 'authRequest'],
 
@@ -82,6 +85,10 @@
         },
 
         computed: {
+
+          ago(){
+              return moment(this.data.created_at).fromNow() + '...'
+          },
 
           signedIn(){
               return window.App.signedIn

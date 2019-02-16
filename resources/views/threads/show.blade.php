@@ -37,71 +37,11 @@
 
                     </div>
 
-                    <!-- thread body and title section ends here -->
-                    <!-- thread replies -->
-                    @if($thread->replies_count > 0)
-                        <!-- thread replies -->
-                        <div class="card mt-4">
-
-                            <!-- replies card header -->
-                            <div class="card-header"><h5 class="font-weight-light">Replies</h5></div>
-
-                            <div class="card-body">
-
-                                 {{--A vue component to show all the replies --}}
-                                <replies auth-ok="{{ Auth::check()}}" :data="{{ $thread->replies }}" @removed="repliesCount--"></replies>
+                    <!-- Replies component coming from vuejs with leave a reply sectionmak-->
+                    <replies auth-ok="{{ Auth::check()}}" @removed="repliesCount--" @added="repliesCount++"></replies>
 
                                 <!-- creating pagination links here -->
                                 {{--{{ $replies->links() }}--}}
-
-                            </div>
-
-                        </div>
-
-                    @endif
-                    <!-- thread replies -->
-
-                    @if(auth()->id())
-
-                        <!-- reply box -->
-                        <div class="card mt-4">
-
-                            <!-- replies card header -->
-                            <div class="card-header">Make a reply</div>
-
-                            @include('includes.errors')
-
-                            <div class="card-body">
-
-                                <form method="POST" action="{{ route('addNewReply', $thread->id) }}">@csrf
-
-                                    <div class="form-group">
-                                            <textarea name="body" id="body" cols="6" rows="3"
-                                                      class="form-control" placeholder="Have something to say..."></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button class="btn btn-light" type="submit"> Post a reply </button>
-                                    </div>
-
-                                </form>
-
-                            </div>
-
-                        </div>
-
-                    @else
-
-                        <div class="row justify-content-center mt-5">
-
-                            <div class="col-md-8">
-                                <p>Please <a href="{{ route('login') }}">sign in</a> to participate in this discussion</p>
-                            </div>
-
-                        </div>
-
-                    @endif
-                    <!-- reply box -->
 
                 </div>
 
@@ -109,14 +49,6 @@
 
                     <!-- thread body and title -->
                     <div class="card">
-
-                        {{--<div class="card-header">--}}
-
-                            {{--<a href="#">&nbsp;{{ $thread->creater->name }}</a> &nbsp;posted this--}}
-                            {{--{{ $thread->created_at->diffForHumans() }} and currently have--}}
-                            {{--{{ $thread->replies()->count() }} replies on it.--}}
-
-                        {{--</div>--}}
 
                         <!-- card for each thread -->
                         <div class="card-body">

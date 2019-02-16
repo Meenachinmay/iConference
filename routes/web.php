@@ -21,8 +21,6 @@ Auth::routes();
 // user dashboard route
 Route::get('home', 'HomeController@index')->name('home');
 
-// modified home route for temperary uses
-//Route::get('home', 'ThreadsController@index')->name('home');
 
 // thread index
 Route::get('threads', 'ThreadsController@index')->name('threadIndex');
@@ -42,7 +40,10 @@ Route::delete('threads/{channel}/{thread}', 'ThreadsController@destroy')->name('
 
 
 // adding reply to a thread route
-Route::post('threads/{thread}/replies', 'RepliesController@store')->name('addNewReply');
+Route::post('threads/{channel}/{thread}/replies', 'RepliesController@store')->name('addNewReply');
+
+// fetching all the replies for a single thread
+Route::get('threads/{channel}/{thread}/replies', 'RepliesController@index')->name('getAllRepliesForAThread');
 
 // route to delete a reply
 Route::delete('/replies/{reply}', 'RepliesController@destroy')->name('deleteReply');

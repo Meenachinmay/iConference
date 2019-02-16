@@ -57,27 +57,22 @@ class ThreadsController extends Controller
     }
 
 
-
+    //
     public function show($channelId, Thread $thread)
     {
-        // showing a thread ( also creating a pagination for replies when they will more than 10 in count)
-        return view ('threads.show', [
-
-            'thread' => $thread,
-            'replies' => $thread->replies()->paginate(10),
-
-        ]);
+        // showing a thread ( also creating a pagination for replies when they will more than 10 in count (but with vuejs)
+        return view ('threads.show', compact('thread'));
     }
 
 
-
+    //
     public function edit(Thread $thread)
     {
 
     }
 
 
-
+    //
     public function update(Request $request, Thread $thread)
     {
         //

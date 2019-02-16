@@ -21,20 +21,31 @@ class RepliesController extends Controller
     // creating auth middleware
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => 'index']);
     }
 
 
+    // index method to handle the request for all the rplies for a single thread
+    public function index($channelId, Thread $thread)
+    {
+        return $thread->replies()->paginate(1);
+    }
+
 
     // store a reply to a thread
-    public function store(Thread $thread, ReplyRequest $request)
+    public function store(Channel $channel, Thread $thread, ReplyRequest $request)
     {
 
-        Reply::create([
+        $reply = Reply::create([
             'user_id' => Auth::id(),
             'thread_id' => $thread->id,
             'body' => $request->body
         ]);
+
+        // for vue js ajax request
+        if($request->expectsJson()){
+            return $reply->load('owner');
+        }
 
         return back()->with('flash', 'New reply added.');
 

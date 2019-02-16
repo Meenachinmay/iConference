@@ -19,7 +19,11 @@
                     <ul style="list-style:none;">
 
                         <a class="text-decoration-none active" href="{{ route('threadIndex') }}"><h6 class="pb-1 text-dark">All threads</h6></a>
-                        <a class="text-decoration-none" href="/threads?by={{ auth()->user()->name }}"><h6 class="pb-1 text-dark">My Threads</h6></a>
+
+                        @if(auth()->check())
+                            <a class="text-decoration-none" href="/threads?by={{ auth()->user()->id }}"><h6 class="pb-1 text-dark">My Threads</h6></a>
+                        @endif
+
                         <a class="text-decoration-none" href="/threads?popular=1"><h6 class="pb-1 text-dark">All Time Popular</h6></a>
                         <a class="text-decoration-none" href="#"><h6 class="pb-1 text-dark">Unanswerd Threads</h6></a>
 

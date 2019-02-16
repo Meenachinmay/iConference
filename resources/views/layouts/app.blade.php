@@ -29,7 +29,7 @@
     </script>
 
 </head>
-<body style="background-color: #ffffff;">
+<body>
     <div id="app">
         @include('includes.navbar')
 

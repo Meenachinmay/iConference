@@ -25,6 +25,9 @@ Vue.component('flash-component', require('./components/FlashCheck.vue').default)
 // pages section
 Vue.component('thread-component', require('./components/Thread.vue').default);
 
+//
+Vue.component('pagination', require('./components/Pagination.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
