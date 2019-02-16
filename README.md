@@ -21,10 +21,10 @@ and this will contain many features which should be there in a forum application
 9. Authorization Policies (DONE)
 10. Activity feed (DONE)
 11. Flash messages with VUEjs (DONE)
-12. Edit and delete reply with VUEjs (ajax request without page refresh) (DONE)
+12. Edit and delete and add a reply with VUEjs (ajax request without page refresh) (DONE)
 12. Activity fees according to dates (DONE)
 13. Liking and disliking is done on Ajax request (DONE)
-12. Laravel and VueJS pagination
+12. Laravel and VueJS pagination (DONE)
 13. A user can filter unanswerd thread
 14. Thread will have subscription
 15. A user cannot reply more than once in a minute
