@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class ThreadFilters extends Filters
 {
     // filters array
-    protected $filters = ['by', 'popular'];
+    protected $filters = ['by', 'popular', 'unanswered'];
     /**
      * Filter the query by a given UserName
      *
@@ -29,12 +29,17 @@ class ThreadFilters extends Filters
 
     protected function popular(){
 
-        // removeing existing order on the query (one we have in ThreadsContoller's getThreads method => (in which we are getting
+        // removing existing order on the query (one we have in ThreadsController's getThreads method => (in which we are getting
         // latest threads) )
         // explicitly clear any other orders
         $this->builder->getQuery()->orders = [];
 
         // ordering the incoming threads with replies count
         return $this->builder->orderBy('replies_count', 'desc');
+    }
+
+    protected function unanswered()
+    {
+        return $this->builder->where('replies_count', 0);
     }
 }

@@ -25,7 +25,7 @@
                         @endif
 
                         <a class="text-decoration-none" href="/threads?popular=1"><h6 class="pb-1 text-dark">All Time Popular</h6></a>
-                        <a class="text-decoration-none" href="#"><h6 class="pb-1 text-dark">Unanswerd Threads</h6></a>
+                        <a class="text-decoration-none" href="/threads?unanswered=1"><h6 class="pb-1 text-dark">Unanswerd Threads</h6></a>
 
                     </ul>
 

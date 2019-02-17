@@ -37,11 +37,8 @@
 
                     </div>
 
-                    <!-- Replies component coming from vuejs with leave a reply sectionmak-->
+                    <!-- Replies component coming from vuejs with leave a reply section mark -->
                     <replies auth-ok="{{ Auth::check()}}" @removed="repliesCount--" @added="repliesCount++"></replies>
-
-                                <!-- creating pagination links here -->
-                                {{--{{ $replies->links() }}--}}
 
                 </div>
 

@@ -36,6 +36,8 @@
                     <!-- threads by popularity (sorted threads on their replies count -->
                         <a class="nav-link" href="/threads?popular=1">All Time Popular</a>
 
+                        <a class="nav-link" href="/threads?unanswered=1">Unanswered Threads</a>
+
                     </div>
                 </li>
 

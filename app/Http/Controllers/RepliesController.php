@@ -28,7 +28,7 @@ class RepliesController extends Controller
     // index method to handle the request for all the rplies for a single thread
     public function index($channelId, Thread $thread)
     {
-        return $thread->replies()->paginate(1);
+        return $thread->replies()->paginate(20);
     }
 
 
@@ -36,10 +36,17 @@ class RepliesController extends Controller
     public function store(Channel $channel, Thread $thread, ReplyRequest $request)
     {
 
-        $reply = Reply::create([
-            'user_id' => Auth::id(),
-            'thread_id' => $thread->id,
-            'body' => $request->body
+//        $reply = Reply::create([
+//            'user_id' => Auth::id(),
+//            'thread_id' => $thread->id,
+//            'body' => $request->body
+//        ]);
+
+        $this->validate(\request(), ['body' => 'required']);
+
+        $reply = $thread->addReply([
+            'body' => request('body'),
+            'user_id' => auth()->id(),
         ]);
 
         // for vue js ajax request

@@ -2021,6 +2021,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2037,23 +2040,26 @@ __webpack_require__.r(__webpack_exports__);
       dataSet: false,
       items: [],
       userAuthData: this.authOk,
-      endpoint: location.pathname + '/replies',
-      repliesFetchingEndPoint: location.pathname + '/replies'
+      endpoint: location.pathname + '/replies'
     };
   },
   created: function created() {
     this.fetch();
   },
   methods: {
+    // to fetch the replies while making an ajax request to the server
     fetch: function fetch(page) {
       // posting a ajax request
       axios.get(this.url(page)).then(this.refresh);
     },
+    // refresh data after every page change request will be made
     refresh: function refresh(_ref) {
       var data = _ref.data;
       this.dataSet = data;
       this.items = data.data;
+      window.scrollTo(0, 0);
     },
+    // url to make ajax request to the server to get the replies
     url: function url(page) {
       if (!page) {
         var query = location.search.match(/page=(\d+)/);
