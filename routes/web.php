@@ -60,7 +60,7 @@ Route::get('threads/{channel}', 'ThreadsController@index')->name('allThreads_of_
 Route::post('replies/{reply}/favorites', 'FavoritesController@store')->name('addFavoriteReply');
 
 // delete a like from favorites table
-Route::delete('replies/{reply}/favorites', 'FavoritesController@destroy')->name('addFavoriteReply');
+Route::delete('replies/{reply}/favorites', 'FavoritesController@destroy')->name('deleteFavoriteReply');
 
 // User Profile routes
 Route::get('/profile/{user}', 'ProfilesController@show')->name('userProfile');
@@ -68,3 +68,12 @@ Route::get('/profile/{user}', 'ProfilesController@show')->name('userProfile');
 
 // end point to subscribe a thread when user click subscribe button
 Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionsController@store')->name('subscribeToThisThread');
+
+// delete user subscriptions for threads
+Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionsController@destroy')->name('deleteSubscriptionToThisThread');
+
+// User Notifications delete (MarkAsRead)
+Route::delete('/profile/{user}/notifications/{notification}', 'UserNotificationsController@destroy')->name('deleteUserNotifications');
+
+// get all the user's notifications
+Route::get('/profile/{user}/notifications', 'UserNotificationsController@index')->name('getAllUserNotifications');

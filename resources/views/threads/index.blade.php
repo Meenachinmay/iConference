@@ -34,7 +34,7 @@
             <div class="col-md-8 px-5 pre-scrollable" style="max-height: 1150px;">
 
                     @foreach($threads as $thread)
-                        <div class="card border-0 rounded" id="threadCard">
+                        <div class="card border-0 rounded-lg shadow-lg" id="threadCard">
 
                             <div class="card-title px-1 py-1 pl-3 mx-2 my-2" style="font-family: 'Century Gothic'">
 

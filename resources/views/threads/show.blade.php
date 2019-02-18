@@ -11,7 +11,7 @@
                 <div class="col-md-7" style="padding-left: 1rem;">
 
                     <!-- thread body and title -->
-                    <div class="card">
+                    <div class="card shadow-sm">
 
                         <div class="card-header">
 
@@ -45,7 +45,7 @@
                 <div class="col-md-4">
 
                     <!-- thread body and title -->
-                    <div class="card rounded-lg">
+                    <div class="card rounded-lg shadow-sm">
 
                         <!-- card for each thread -->
                         <div class="card-body">
@@ -57,9 +57,13 @@
                         </div>
 
                         <!-- Subscribe button to subscribe a thread -->
-                        <p class="mt-2 ml-3 px-1">
-                            <subscribe></subscribe>
-                        </p>
+                        @if(Auth::check())
+                            <p class="mt-2 ml-3 px-1">
+
+                                <subscribe :active="{{ $thread->isSubscribedTo ? 'true' : 'false'}}"></subscribe>
+
+                            </p>
+                        @endif
 
                     </div>
 

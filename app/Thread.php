@@ -2,8 +2,13 @@
 
 namespace App;
 
+use App\Notifications\ThreadGotReply;
 use Illuminate\Database\Eloquent\Model;
+use App\ThreadSubscription;
 
+/**
+ * @property mixed subscriptions
+ */
 class Thread extends Model
 {
     use RecordsActivity;
@@ -11,6 +16,8 @@ class Thread extends Model
     protected $fillable = ['user_id', 'channel_id', 'title', 'body'];
 
     protected $with = ['creater', 'channel'];
+
+    protected $appends = ['isSubscribedTo'];
 
 
     protected static function boot()
@@ -27,7 +34,6 @@ class Thread extends Model
            });
 
         });
-
 
     }
 
@@ -47,7 +53,7 @@ class Thread extends Model
     }
 
 
-    // A thread can have a userweb
+    // A thread can have a user
     public function creater(){
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -70,10 +76,27 @@ class Thread extends Model
     public function addReply($reply)
     {
         // this will take thread id automatically because Thread has a one to many relationship with Reply
-        return $this->replies()->create($reply);
+        // create a reply
+        $reply =  $this->replies()->create($reply);
+
+        // get all the subscribers and send them notifications
+        $this->subscriptions->filter( function ($sub) use ($reply){
+            return $sub->user_id != $reply->user_id;
+        })
+        ->each->notify($reply);
+
+        return $reply;
     }
 
-    // a user can subscribe to a thread
+
+    public function getIsSubscribedToAttribute()
+    {
+        return $this->subscriptions()
+            ->where('user_id', auth()->id())
+            ->exists();
+    }
+
+
     public function subscribe($userId = null)
     {
         $this->subscriptions()->create([
@@ -81,7 +104,7 @@ class Thread extends Model
         ]);
     }
 
-    // a user can unsubscribe to a thread
+
     public function unsubscribe($userId = null)
     {
         $this->subscriptions()->where([
@@ -89,11 +112,11 @@ class Thread extends Model
         ])->delete();
     }
 
+
     // a thread can have subscriptions
     public function subscriptions()
     {
         return $this->hasMany(ThreadSubscription::class);
     }
-
 
 }

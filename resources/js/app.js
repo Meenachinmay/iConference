@@ -26,6 +26,9 @@ Vue.component('flash-component', require('./components/FlashCheck.vue').default)
 Vue.component('thread-component', require('./components/Thread.vue').default);
 
 //
+Vue.component('user-notifications', require('./components/UserNotifications.vue').default);
+
+//
 Vue.component('pagination', require('./components/Pagination.vue').default);
 
 /**
