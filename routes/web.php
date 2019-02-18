@@ -65,3 +65,6 @@ Route::delete('replies/{reply}/favorites', 'FavoritesController@destroy')->name(
 // User Profile routes
 Route::get('/profile/{user}', 'ProfilesController@show')->name('userProfile');
 
+
+// end point to subscribe a thread when user click subscribe button
+Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionsController@store')->name('subscribeToThisThread');

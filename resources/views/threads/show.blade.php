@@ -8,7 +8,7 @@
             <!-- show a single thread-->
             <div class="row justify-content-md-center">
 
-                <div class="col-md-6" style="padding-left: 1rem;">
+                <div class="col-md-7" style="padding-left: 1rem;">
 
                     <!-- thread body and title -->
                     <div class="card">
@@ -45,7 +45,7 @@
                 <div class="col-md-4">
 
                     <!-- thread body and title -->
-                    <div class="card">
+                    <div class="card rounded-lg">
 
                         <!-- card for each thread -->
                         <div class="card-body">
@@ -55,6 +55,11 @@
                             and currently has <span v-text="repliesCount"></span> {{ str_plural('reply', $thread->replies_count) }} on it.
 
                         </div>
+
+                        <!-- Subscribe button to subscribe a thread -->
+                        <p class="mt-2 ml-3 px-1">
+                            <subscribe></subscribe>
+                        </p>
 
                     </div>
 

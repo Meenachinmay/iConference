@@ -17,14 +17,14 @@
                                   rows="3"
                                   class="form-control"
                                   v-model="body"
-                                  placeholder="Have something to say...">
+                                  placeholder="Have something to say..." required>
 
                         </textarea>
 
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-sm btn-success" type="submit" v-on:click="addReply"> Post a reply </button>
+                        <button class="btn btn-sm btn-success rounded-pill" type="submit" v-on:click="addReply"> Post a reply </button>
                     </div>
 
             </div>

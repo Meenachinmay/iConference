@@ -47,7 +47,7 @@ class Thread extends Model
     }
 
 
-    // A thread can have a user
+    // A thread can have a userweb
     public function creater(){
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -72,5 +72,28 @@ class Thread extends Model
         // this will take thread id automatically because Thread has a one to many relationship with Reply
         return $this->replies()->create($reply);
     }
+
+    // a user can subscribe to a thread
+    public function subscribe($userId = null)
+    {
+        $this->subscriptions()->create([
+            'user_id' => $userId ?: auth()->id(),
+        ]);
+    }
+
+    // a user can unsubscribe to a thread
+    public function unsubscribe($userId = null)
+    {
+        $this->subscriptions()->where([
+            'user_id' => $userId ?: auth()->id(),
+        ])->delete();
+    }
+
+    // a thread can have subscriptions
+    public function subscriptions()
+    {
+        return $this->hasMany(ThreadSubscription::class);
+    }
+
 
 }
