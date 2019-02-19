@@ -25,10 +25,10 @@ and this will contain many features which should be there in a forum application
 12. Activity fees according to dates (DONE)
 13. Liking and disliking is done on Ajax request (DONE)
 12. Laravel and VueJS pagination (DONE)
-13. A user can filter unanswerd thread (DONE)
-14. Thread will have subscription (DONE)
+13. A user can filter unanswerd thread
+14. Thread will have subscription
 15. A user cannot reply more than once in a minute
-16. User notifications (DONE)
+16. User notifications
 17. Instant username auto completion
 18. Mark the best reply
 19. Trending thread with redis
