@@ -4,6 +4,7 @@
     <div class="container mt-3" style="max-width: 1240px;">
         <div class="row">
 
+            <!-- Left side of page to show (THREADS's CATEGORY SECTION -->
             <div class="col-md-2 mt-2" style="font-family: 'Century Gothic';">
 
                 <a href="{{ route('threadCreate') }}" class="btn btn-primary btn-md ml-3 mb-3">Add New Thread</a>
@@ -31,6 +32,7 @@
 
             </div>
 
+            <!-- Middle side of page to show (MAIN SECTION -->
             <div class="col-md-8 px-5 pre-scrollable" style="max-height: 1150px;">
 
                     @foreach($threads as $thread)
@@ -44,7 +46,13 @@
 
                                 <!-- Thread title -->
                                 <a href="{{ $thread->path() }}" style="text-decoration: none;">
-                                    <h5 class="text-dark"><strong>{{ $thread->title }}</strong></h5>
+
+                                    @if($thread->hasUpdatesFor(auth()->user()))
+                                        <h5 class="text-dark"><strong>{{ $thread->title }}</strong></h5>
+                                    @else
+                                        <h5 class="text-dark">{{ $thread->title }}</h5>
+                                    @endif
+
                                 </a>
 
                                 <img src="https://img.icons8.com/color/48/000000/hand-with-pen.png" style="width: 20px; height: 20px;">
@@ -67,6 +75,7 @@
                     @endforeach
             </div>
 
+            <!-- right side of page to show channels (CHANNEL'S SECTION -->
             <div class="col-md-2 border-left overflow-auto" style="font-family: 'Century Gothic'; max-height: 450px;">
 
                 <div class="text-center py-2">

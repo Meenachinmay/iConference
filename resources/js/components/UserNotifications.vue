@@ -40,7 +40,7 @@
         methods: {
             markAsRead(notification) {
                 axios.delete("/profile/" + window.App.user.name +"/notifications/" + notification.id)
-            }
+            },
         },
     }
 

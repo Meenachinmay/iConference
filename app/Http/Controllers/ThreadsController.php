@@ -7,7 +7,9 @@ use App\Filters\ThreadFilters;
 use App\User;
 use App\Http\Requests\ThreadRequest;
 use App\Thread;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ThreadsController extends Controller
 {
@@ -57,9 +59,13 @@ class ThreadsController extends Controller
     }
 
 
-    //
+    // return a view to show a single thread view
     public function show($channelId, Thread $thread)
     {
+        if (Auth::check()) {
+            // save page visit
+            auth()->user()->read($thread);
+        }
         // showing a thread ( also creating a pagination for replies when they will more than 10 in count (but with vuejs)
         return view ('threads.show', compact('thread'));
     }

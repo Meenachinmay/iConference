@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Favorite;
+
 use App\Http\Requests\ReplyRequest;
-use Illuminate\Http\Request;
+use App\Inspection\Spam;
 use App\Thread;
 use App\Channel;
 use App\Reply;
@@ -13,11 +13,6 @@ use Auth;
 class RepliesController extends Controller
 {
 
-    // add a reply to a particular thread
-    /**
-     * RepliesController constructor.
-     */
-
     // creating auth middleware
     public function __construct()
     {
@@ -25,24 +20,19 @@ class RepliesController extends Controller
     }
 
 
-    // index method to handle the request for all the rplies for a single thread
+    // index method to handle the request for all the replies for a single thread
     public function index($channelId, Thread $thread)
     {
-        return $thread->replies()->paginate(10);
+        return $thread->replies()->paginate(20);
     }
 
 
     // store a reply to a thread
-    public function store(Channel $channel, Thread $thread, ReplyRequest $request)
+    public function store(Channel $channel, Thread $thread, ReplyRequest $request, Spam $spam)
     {
 
-//        $reply = Reply::create([
-//            'user_id' => Auth::id(),
-//            'thread_id' => $thread->id,
-//            'body' => $request->body
-//        ]);
-
-        $this->validate(\request(), ['body' => 'required']);
+        // detecting for spam keywords in reply
+        $spam->detect(request('body'));
 
         $reply = $thread->addReply([
             'body' => request('body'),
@@ -57,7 +47,6 @@ class RepliesController extends Controller
         return back()->with('flash', 'New reply added.');
 
     }
-
 
 
     // update a reply here (with vuejs)
