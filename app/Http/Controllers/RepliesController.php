@@ -9,6 +9,7 @@ use App\Thread;
 use App\Channel;
 use App\Reply;
 use Auth;
+use Illuminate\Support\Facades\Session;
 
 class RepliesController extends Controller
 {
@@ -41,11 +42,11 @@ class RepliesController extends Controller
 
         // for vue js ajax request
         if($request->expectsJson()){
+            //Session::put('flash', 'New reply added.');
             return $reply->load('owner');
         }
 
         return back()->with('flash', 'New reply added.');
-
     }
 
 

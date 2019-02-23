@@ -20,15 +20,15 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('flash-component', require('./components/FlashCheck.vue').default);
+Vue.component('flash-component', require('./components/FlashComponent.vue').default);
 
 // pages section
 Vue.component('thread-component', require('./components/Thread.vue').default);
 
-//
+// User notifications vue component
 Vue.component('user-notifications', require('./components/UserNotifications.vue').default);
 
-//
+// pagination vue component
 Vue.component('pagination', require('./components/Pagination.vue').default);
 
 /**

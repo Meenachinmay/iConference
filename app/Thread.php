@@ -108,6 +108,8 @@ class Thread extends Model
         $this->subscriptions()->create([
             'user_id' => $userId ?: auth()->id(),
         ]);
+
+        //return Sessoin::put('flash', 'Thread has been subscribed');
     }
 
 
@@ -116,6 +118,8 @@ class Thread extends Model
         $this->subscriptions()->where([
             'user_id' => $userId ?: auth()->id(),
         ])->delete();
+
+        //return Sessoin::put('flash', 'Thread has been unsubscribed');
     }
 
 

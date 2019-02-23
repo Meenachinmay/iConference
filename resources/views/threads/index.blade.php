@@ -34,45 +34,48 @@
 
             <!-- Middle side of page to show (MAIN SECTION -->
             <div class="col-md-8 px-5 pre-scrollable" style="max-height: 1150px;">
+                    @if(count($threads) == 0)
+                        <h1>NO threads at this time.</h1>
+                    @else
+                        @foreach($threads as $thread)
+                            <div class="card border-0 rounded-lg shadow-lg" id="threadCard">
 
-                    @foreach($threads as $thread)
-                        <div class="card border-0 rounded-lg shadow-lg" id="threadCard">
+                                <div class="card-title px-1 py-1 pl-3 mx-2 my-2" style="font-family: 'Century Gothic'">
 
-                            <div class="card-title px-1 py-1 pl-3 mx-2 my-2" style="font-family: 'Century Gothic'">
+                                    <!-- replies count with thread path link -->
+                                    <p class="float-right text-dark"> {{ $thread->replies_count }}
+                                    <img src="https://img.icons8.com/color/48/000000/comments.png" alt="" style="width: 15px; height: 15px;"></p>
 
-                                <!-- replies count with thread path link -->
-                                <p class="float-right text-dark"> {{ $thread->replies_count }}
-                                <img src="https://img.icons8.com/color/48/000000/comments.png" alt="" style="width: 15px; height: 15px;"></p>
+                                    <!-- Thread title -->
+                                    <a href="{{ $thread->path() }}" style="text-decoration: none;">
 
-                                <!-- Thread title -->
-                                <a href="{{ $thread->path() }}" style="text-decoration: none;">
+                                        @if($thread->hasUpdatesFor(auth()->user()))
+                                            <h5 class="text-dark"><strong>{{ $thread->title }}</strong></h5>
+                                        @else
+                                            <h5 class="text-dark">{{ $thread->title }}</h5>
+                                        @endif
 
-                                    @if($thread->hasUpdatesFor(auth()->user()))
-                                        <h5 class="text-dark"><strong>{{ $thread->title }}</strong></h5>
-                                    @else
-                                        <h5 class="text-dark">{{ $thread->title }}</h5>
-                                    @endif
+                                    </a>
 
-                                </a>
+                                    <img src="https://img.icons8.com/color/48/000000/hand-with-pen.png" style="width: 20px; height: 20px;">
+                                    <small class="ml-2" style="font-size: 12px;"><a href="{{ $thread->creater->path() }}" style="text-decoration: none;">{{ $thread->creater->name}}</a></small>
 
-                                <img src="https://img.icons8.com/color/48/000000/hand-with-pen.png" style="width: 20px; height: 20px;">
-                                <small class="ml-2" style="font-size: 12px;"><a href="{{ $thread->creater->path() }}" style="text-decoration: none;">{{ $thread->creater->name}}</a></small>
+                                </div>
+
+                                <div class="card-body overflow-hidden">
+
+                                    <articel>
+
+                                        <div class="body pl-1" style="max-height: 5rem; font-family: 'Century Gothic';">{{ $thread->body }}</div>
+
+                                    </articel>
+
+                                </div>
 
                             </div>
-
-                            <div class="card-body overflow-hidden">
-
-                                <articel>
-
-                                    <div class="body pl-1" style="max-height: 5rem; font-family: 'Century Gothic';">{{ $thread->body }}</div>
-
-                                </articel>
-
-                            </div>
-
-                        </div>
-                        <div class="border-bottom"></div>
-                    @endforeach
+                            <div class="border-bottom"></div>
+                        @endforeach
+                    @endif
             </div>
 
             <!-- right side of page to show channels (CHANNEL'S SECTION -->

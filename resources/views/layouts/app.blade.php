@@ -35,8 +35,9 @@
 
         <!-- flash component place here -->
         <div class="container">
-
-            {{--<flash-component></flash-component>--}}
+            <div style="position: fixed; right:25px; bottom: 25px;">
+                <flash-component message="{{ session('flash') }}"></flash-component>
+            </div>
 
         </div>
 
